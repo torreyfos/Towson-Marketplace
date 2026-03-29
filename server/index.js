@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config({debug: true });
+
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
