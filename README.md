@@ -6,7 +6,7 @@ Taylor Williams [https://github.com/Tay-Williams]
 
 Torrey Foster [https://github.com/torreyfos]
 
-Beatrice Amoako-Dua
+Beatrice Amoako-Dua [https://github.com/BeatriceD2603]
 
 Justice Moody [ https://github.com/Justicem04 ]
 
