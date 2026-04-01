@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const Listing = require('../models/listing');
 const tokenAuth = require("../middleware/tokenAuth");
 
@@ -12,7 +11,7 @@ router.get("/", async function (req, res) {
 
     try {
 
-        const allListings = (await Listing.find()).sort(-1);
+        const allListings = await Listing.find({}).sort({createdAt: -1});
 
         res.status(200).json(allListings);
 
@@ -82,7 +81,7 @@ router.delete("/:id", tokenAuth, async function (req, res) {
         }
 
         //checks to see if the user owns this lisitng
-        if (listing.seller.toString() !== req.user.user._id) {
+        if (listing.seller.toString() !== req.user._id) {
             return res.status(401).json({ message: "Not Authorized To Delete" });
         }
 
@@ -100,9 +99,22 @@ router.delete("/:id", tokenAuth, async function (req, res) {
 //allows a user to update one of their listings
 router.patch("/:id", tokenAuth, async function (req, res) {
 
+    const {title, description, price, status} = req.body;
     try {
 
+        const updatedListing = await Listing.findById(req.params.id);
+        //checks to see if listing exists
+        if(!updatedListing) {
 
+            return res.status(404).json({message: "Listing Doesn't Exist"});
+        }
+
+        //checks to see if user owns the listing
+        if (updatedListing.seller.toString() !== req.user.id) {
+            return res.status(401).json({message: "Not Authorized To Update"});
+        }
+
+        updatedListing.updateOne({title}, {$set: {title}})
         res.status(200).json({message: "Patch request to update a user's specific listing"});
 
     } catch (error) {

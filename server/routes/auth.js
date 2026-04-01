@@ -8,7 +8,7 @@ const tokenAuth = require("../middleware/tokenAuth");
 //function to create a token so we can authenticate the user
 const createToken = function (_id) {
 
-  return jwt.sign({_id}, process.env.SECRET_TOKEN_KEY, {expiresIn: "3d"});
+  return jwt.sign({_id}, process.env.SECRET_TOKEN_KEY, {expiresIn: "7d"});
 };
 
 
@@ -93,13 +93,11 @@ router.post('/login', async (req, res) => {
 //deletes a specific user
 router.delete("/:id", tokenAuth, async function (req, res) {
 
-  const userID = req.user.id;
-
   try {
 
-    const user = await User.findById(id);
+    const user = await User.findById(req.user._id);
 
-    //deletes the first user document found with the given email
+    //deletes the first user document found with the given id
     var result = await User.deleteOne({_id: _id});
 
     if (result.deletedCount === 0) {
