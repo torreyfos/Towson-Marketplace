@@ -52,7 +52,7 @@ router.get("/:id", async function (req, res) {
 router.post("/", tokenAuth, async function (req, res) {
 
     const {title, description, price, status} = req.body;
-console.log("req.user:", req.user);
+
     try {
 
         const newListing = await Listing.create({title, description, price, status, seller: req.user._id});
@@ -102,20 +102,35 @@ router.patch("/:id", tokenAuth, async function (req, res) {
     const {title, description, price, status} = req.body;
     try {
 
-        const updatedListing = await Listing.findById(req.params.id);
+        const updateListing = await Listing.findById(req.params.id);
+
         //checks to see if listing exists
-        if(!updatedListing) {
+        if(!updateListing) {
 
             return res.status(404).json({message: "Listing Doesn't Exist"});
         }
 
         //checks to see if user owns the listing
-        if (updatedListing.seller.toString() !== req.user.id) {
+        if (updateListing.seller.toString() !== req.user._id) {
             return res.status(401).json({message: "Not Authorized To Update"});
         }
 
-        updatedListing.updateOne({title}, {$set: {title}})
-        res.status(200).json({message: "Patch request to update a user's specific listing"});
+        //checks to see if the field the user gave exists before saving it to the listing
+        if (title !== undefined) {
+            updateListing.title = title;
+        }
+        if (description !== undefined) {
+            updateListing.description = description;
+        }
+        if (price !== undefined) {
+            updateListing.price = price;
+        }
+        if (status !== undefined) {
+            updateListing.status = status;
+        }
+
+        await updateListing.save();
+        res.status(200).json({updateListing});
 
     } catch (error) {
 
