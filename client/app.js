@@ -1,6 +1,5 @@
-const BASE_URL = "http://localhost:5000/api/items"; // your backend
+const BASE_URL = "http://localhost:5000/api/items"; 
 
-// LOGIN
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
 
@@ -8,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", handleLogin);
     }
 
-    // Auto-load items if on marketplace page
     if (document.getElementById("itemsList")) {
         loadAllItems();
     }
@@ -22,7 +20,6 @@ function handleLogin(event) {
     const password = document.getElementById("password").value;
     const error = document.getElementById("error");
 
-    // Validation
     if (!/^\d{7}$/.test(tuId)) {
         error.textContent = "TU ID must be exactly 7 digits.";
         return;
@@ -37,16 +34,11 @@ function handleLogin(event) {
         error.textContent = "Password is required.";
         return;
     }
-
-    // Save session (simple)
     localStorage.setItem("user", email);
 
-    // Redirect
     window.location.href = "tumarketplace_completed.html";
 }
 
-
-// LOAD ALL ITEMS FROM MONGODB
 async function loadAllItems() {
     try {
         const res = await fetch(BASE_URL);
@@ -57,8 +49,6 @@ async function loadAllItems() {
     }
 }
 
-
-// SEARCH ITEMS
 async function searchItems() {
     const search = document.getElementById("searchInput").value;
     const category = document.getElementById("category").value;
@@ -77,8 +67,6 @@ async function searchItems() {
     }
 }
 
-
-// DISPLAY ITEMS
 function displayItems(items) {
     const list = document.getElementById("itemsList");
     list.innerHTML = "";
