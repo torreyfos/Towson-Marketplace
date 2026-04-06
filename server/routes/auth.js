@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const Listing = require('../models/listing');
 const tokenAuth = require("../middleware/tokenAuth");
 
 //function to create a token so we can authenticate the user
@@ -15,10 +16,15 @@ const createToken = function (_id) {
 
 //POST /auth/register
 //creates a new user account
-router.post('/register', async (req, res) => {
+router.post('/register', async function (req, res) {
   const { name, email, password } = req.body;
 
   try {
+
+    if ( !( email.includes("@students.towson.edu") ) ) {
+      
+      return res.status(404).json({message: "Not a Towson University student email"})
+    }
 
     //check if user already exists by checking the database for the given email
     var user = await User.findOne({email});
@@ -56,7 +62,7 @@ router.post('/register', async (req, res) => {
 
 //POST /auth/login
 //lets a user login
-router.post('/login', async (req, res) => {
+router.post('/login', async function (req, res) {
   const {email, password} = req.body;
 
   try {
@@ -89,18 +95,24 @@ router.post('/login', async (req, res) => {
 
 
 
-//DELETE /auth/delete
+//DELETE /auth/delete/:id
 //deletes a specific user
-router.delete("/:id", tokenAuth, async function (req, res) {
+router.delete("/delete/:id", tokenAuth, async function (req, res) {
 
   try {
 
-    const user = await User.findById(req.user._id);
+    if (req.params.id !== req.user._id) {
+
+      return res.status(401).json({message: "Not authorized to delete this user"})
+    }
+
+    //deletes a user's created listings
+    await Listing.deleteMany({seller : req.user._id});
 
     //deletes the first user document found with the given id
-    var result = await User.deleteOne({_id: _id});
+    var userResult = await User.deleteOne({_id: req.user._id});
 
-    if (result.deletedCount === 0) {
+    if (userResult.deletedCount === 0) {
 
       return res.status(404).json({message: "User Doesn't Exist"})
     }

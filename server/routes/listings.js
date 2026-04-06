@@ -11,7 +11,7 @@ router.get("/", async function (req, res) {
 
     try {
 
-        const allListings = await Listing.find({}).sort({createdAt: -1});
+        const allListings = await Listing.find({}).sort({createdAt: -1}).populate("seller", "name email");
 
         res.status(200).json(allListings);
 
