@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import favicon from "./Towson_Marketplace_Favicon.png";
+import Login from "./ReactRoutes/Login";
+import Homepage from "./ReactRoutes/Homepage";
+import HeaderBar from "./Components/HeaderBar";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" >
+      <link rel = "shortcut icon" href = {favicon} ></link>
+        <BrowserRouter>
+          <HeaderBar />
+          <div className="reactRoutes">
+            <Routes>
+
+              <Route 
+                exact path = "/" 
+                element = {<Homepage />}
+              />
+
+              <Route 
+                path = "/auth/login"
+                element = {<Login />}
+              />
+
+              <Route 
+                path = ""
+
+              />
+
+              
+
+            </Routes>
+          </div>
+        </BrowserRouter>
     </div>
   );
 }

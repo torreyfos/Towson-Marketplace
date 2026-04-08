@@ -110,6 +110,11 @@ router.patch("/:id", tokenAuth, async function (req, res) {
             return res.status(404).json({message: "Listing Doesn't Exist"});
         }
 
+        //checks to see if the user owns this lisitng
+        if (updateListing.seller.toString() !== req.user._id) {
+            return res.status(401).json({ message: "Not Authorized To Update" });
+        }
+
         //checks to see if user owns the listing
         if (updateListing.seller.toString() !== req.user._id) {
             return res.status(401).json({message: "Not Authorized To Update"});

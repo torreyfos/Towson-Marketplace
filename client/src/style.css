@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background-color: black;
+    color: #FFBB00;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid #FFBB00;
+}
+
+.login-container .logo {
+    width: 250px;
+    display: block;
+    margin: auto;
+}
+
+.logo-small {
+    width: 60px;
+}
+
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+}
+
+button {
+    background-color: #FFBB00;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e6bc00;
+}
+
+.container {
+    padding: 20px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.item-card {
+    background-color: #111;
+    border: 1px solid #FFD100;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.error {
+    color: red;
+}
+
+/* Header Bar Styling */
+
+.headerbar #favicon {
+
+    width:100px;
+    border-radius: 0.5rem;
+}
+
+.headerbar p {
+
+    margin-left: 5rem;
+    display: inline;
+
+}
+
+.headerbar a {
+
+    color: #FFBB00;
+}
+
+.headerbar {
+
+    position: sticky;
+    top: 0rem;
+    background-color: rgb(42, 41, 41);
+    text-decoration: none;
+    z-index: 100rem;
+    width: 100%;
+}
+
+/* Homepage Styling */
+
+.listings {
+
+    background-color: rgb(248, 182, 16);
+    padding-bottom: 100%;
+    padding-top: 1%;
+}
+
+.eachListing {
+    display: block;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #888888;
+    margin: 1rem;
+}
+
+.eachListing:hover {
+
+    transform:scale(1.1);
+    box-shadow: 10px 10px 8px rgb(42, 41, 41);
+}
+
