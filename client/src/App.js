@@ -3,6 +3,8 @@ import favicon from "./Towson_Marketplace_Favicon.png";
 import Login from "./ReactRoutes/Login";
 import Homepage from "./ReactRoutes/Homepage";
 import HeaderBar from "./Components/HeaderBar";
+import Profile from "./ReactRoutes/Profile";
+import Register from "./ReactRoutes/Register";
 
 
 function App() {
@@ -26,11 +28,14 @@ function App() {
               />
 
               <Route 
-                path = ""
-
+                path = "/profile"
+                element = {<Profile />}
               />
 
-              
+              <Route 
+                path = "/auth/register"
+                element = {<Register />}
+              />              
 
             </Routes>
           </div>
