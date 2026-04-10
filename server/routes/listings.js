@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Listing = require('../models/listing');
+const Listing = require('../models/Listing');
 const tokenAuth = require("../middleware/tokenAuth");
 
 //performs all the CRUD operations on the listings
@@ -51,11 +51,11 @@ router.get("/:id", async function (req, res) {
 //creates a new listing
 router.post("/", tokenAuth, async function (req, res) {
 
-    const {title, description, price, status} = req.body;
+    const {title, description, price, status, category} = req.body;
 
     try {
 
-        const newListing = await Listing.create({title, description, price, status, seller: req.user._id});
+        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category});
         res.status(201).json(newListing);
 
     } catch (error) {
@@ -99,7 +99,7 @@ router.delete("/:id", tokenAuth, async function (req, res) {
 //allows a user to update one of their listings
 router.patch("/:id", tokenAuth, async function (req, res) {
 
-    const {title, description, price, status} = req.body;
+    const {title, description, price, status, category} = req.body;
     try {
 
         const updateListing = await Listing.findById(req.params.id);
@@ -130,9 +130,8 @@ router.patch("/:id", tokenAuth, async function (req, res) {
         if (price !== undefined) {
             updateListing.price = price;
         }
-        if (status !== undefined) {
             updateListing.status = status;
-        }
+            updateListing.category = category;
 
         await updateListing.save();
         res.status(200).json({updateListing});

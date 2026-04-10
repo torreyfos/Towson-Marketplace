@@ -5,6 +5,8 @@ import Homepage from "./ReactRoutes/Homepage";
 import HeaderBar from "./Components/HeaderBar";
 import Profile from "./ReactRoutes/Profile";
 import Register from "./ReactRoutes/Register";
+import CreateListing from "./ReactRoutes/CreateListing";
+import ListingDetails from "./ReactRoutes/ListingDetails";
 
 
 function App() {
@@ -35,7 +37,17 @@ function App() {
               <Route 
                 path = "/auth/register"
                 element = {<Register />}
-              />              
+              />
+
+              <Route 
+                path = "/create"
+                element = {<CreateListing />}
+              /> 
+
+              <Route 
+                path = "/ListingDetails/:id"
+                element = {<ListingDetails />}
+              /> 
 
             </Routes>
           </div>

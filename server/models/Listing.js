@@ -20,8 +20,8 @@ const listingSchema = new mongoose.Schema({
 
     status: {
         type: String,
-        enum: ["available", "sold"],
-        deafault: "available",
+        enum: ["Available", "Sold"],
+        default: "Available",
         required: true,
     },
 
@@ -30,6 +30,13 @@ const listingSchema = new mongoose.Schema({
         //the id of a user document to track what user owns what listing
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
+    },
+
+    category: {
+        type: String,
+        enum: ["Essentials", "School Supplies", "Furniture", "Other"],
+        default: "Other",
         required: true,
     }
 

@@ -10,6 +10,7 @@ return (
 
             <img src = {favicon} id = "favicon"/>
 
+            {/* links added to the header bar to nagivate */}
             <Link to = "/">TU Marketplace</Link>
 
             <Link to = "/auth/login"> <p>Login</p> </Link>
