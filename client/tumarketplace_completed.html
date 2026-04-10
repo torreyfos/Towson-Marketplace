@@ -11,6 +11,10 @@
 <header>
     <img src="logo.png" alt="TU Logo" class="logo-small">
     <h1>TU Marketplace</h1>
+    <nav>
+        <a href="tumarketplace_completed.html">Marketplace</a>
+        <a href="aboutUs.html">About Us</a>
+    </nav>
 </header>
 
 <div class="container">
@@ -28,8 +32,48 @@
     <button onclick="searchItems()">Search</button>
 
     <h2>Available Items</h2>
-    <ul id="itemsList"></ul>
+    <ul id="itemsList">
 
+        <!--example listings -->
+        <li class="item-listing">
+            <div class="item-image">
+              <img src="textbook.jpeg" alt="Item">
+            </div>
+            <div class="item-info">
+              <p class="item-price">$25.00</p>
+              <p class="item-title">Textbook - COSC 175</p>
+              <p class="item-description">Barely used, great condition.</p>
+              <p class="item-category">School Supplies · On Campus</p>
+            </div>
+          </li>
+          
+          <li class="item-listing">
+            <div class="item-image">
+              <img src="lamp.jpeg" alt="Item">
+            </div>
+            <div class="item-info">
+              <p class="item-price">$50.00</p>
+              <p class="item-title">Desk Lamp</p>
+              <p class="item-description">Black desk lamp, works perfectly.</p>
+              <p class="item-category">Essentials · West Village</p>
+            </div>
+          </li>
+          
+          <li class="item-listing">
+            <div class="item-image">
+              <img src="mini_fridge.jpeg" alt="Item">
+            </div>
+            <div class="item-info">
+              <p class="item-price">$120.00</p>
+              <p class="item-title">Mini Fridge</p>
+              <p class="item-description">Small fridge, perfect for dorm rooms.</p>
+              <p class="item-category">Furniture · Prettyman Hall</p>
+            </div>
+          </li>
+
+
+
+    </ul>
 </div>
 
 <script src="app.js"></script>

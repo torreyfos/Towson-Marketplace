@@ -78,14 +78,18 @@ function displayItems(items) {
 
     items.forEach(item => {
         const li = document.createElement("li");
-        li.className = "item-card";
+        li.className = "item-listing";
 
         li.innerHTML = `
-            <h3>${item.title}</h3>
-            <p><strong>Price:</strong> $${item.price}</p>
-            <p><strong>Category:</strong> ${item.category}</p>
-            <p><strong>Location:</strong> ${item.location || "Not specified"}</p>
-            <p>${item.description || ""}</p>
+            <div class="item-image">
+                <img src="${item.image || 'placeholder.png'}" alt="${item.title}">
+            </div>
+            <div class="item-info">
+            <p class="item-price">$${item.price}</p>
+            <p class="item-title">${item.title}</p>
+            <p class="item-description">${item.description || "No description provided"}</p>
+            <p class="item-category">${item.category} · ${item.location || "Location TBD"}</p>
+            </div>
         `;
 
         list.appendChild(li);
