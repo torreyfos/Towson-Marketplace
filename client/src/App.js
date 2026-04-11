@@ -7,6 +7,7 @@ import Profile from "./ReactRoutes/Profile";
 import Register from "./ReactRoutes/Register";
 import CreateListing from "./ReactRoutes/CreateListing";
 import ListingDetails from "./ReactRoutes/ListingDetails";
+import AboutUs from "./ReactRoutes/AboutUs";
 
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
               <Route 
                 path = "/ListingDetails/:id"
                 element = {<ListingDetails />}
+              /> 
+
+              <Route 
+                path = "/aboutUs"
+                element = {<AboutUs />}
               /> 
 
             </Routes>

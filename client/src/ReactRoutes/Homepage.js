@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import logo from "../Towson-Marketplace-Logo.png";
+import logo from "../textbook.jpeg";
 
 const Homepage = function () {
 
@@ -24,49 +24,55 @@ const Homepage = function () {
 
     return (
 
-        <div className="homepage">
+    <div className="container">
 
-            <img src = {logo} id = "homepageLogo" />
+        <div className="search-container">
+            <input type="text" id="searchInput" placeholder="Search items..." />
+        
+            <label for="category">Category:</label>
+            <select id="category">
+                <option value="">All</option>
+                <option value="essentials">Essentials</option>
+                <option value="school">School Supplies</option>
+                <option value="furniture">Furniture</option>
+                <option value = "Other">Other</option>
+            </select>
 
-            <header>
-                <h1>TU Marketplace</h1>
-            </header>
+            <button onclick="searchItems()">Search</button>
+        </div>
 
-            <div className="container">
+        <h2>Available Items</h2>
+        
+        <div className="listings">
+            {listings && listings.map( (listings) => (
 
-                <input type="text" id="searchInput" placeholder="Search items..." />
-                
-                <label for="category">Category:</label>
-                <select id="category">
-                    <option value="">All</option>
-                    <option value="essentials">Essentials</option>
-                    <option value="school">School Supplies</option>
-                    <option value="furniture">Furniture</option>
-                    <option vaulue = "Other">Other</option>
-                </select>
+                <div className = "eachListing" key = {listings._id}>
+                    
+                    <li className="item-listing">
 
-                <button onclick="searchItems()">Search</button>
-
-                <h2>Available Items</h2>
-                
-                <div className="listings">
-                    {listings && listings.map( (listings) => (
-
-                        <div className = "eachListing" key = {listings._id}>
-                            
-                            <Link to = {`/ListingDetails/${listings._id}`}>
-                                {/* displays a listing's title and price fields */}
-                                <h3> {listings.title} </h3>
-                                <p> ${listings.price} </p>
-                                <p>{listings.category}</p>
-                            </Link>
+                        <div className="item-image">
+                            <img src={logo} alt="Item" />
                         </div>
                         
-                    ))}
+                        <div className="item-info">
+
+                            <Link to = {`/ListingDetails/${listings._id}`}>
+
+                                <p className="item-price">${listings.price}</p>
+                                <p className="item-title">{listings.title}</p>
+                                <p className="item-description">{listings.description}</p>
+                                <p className="item-category">{listings.category} · On Campus</p>
+                            </Link>
+
+                        </div>
+                    </li>
 
                 </div>
-            </div>
+                
+            ))}
+
         </div>
+    </div>
         
     )
 }

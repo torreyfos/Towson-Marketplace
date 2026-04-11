@@ -41,10 +41,36 @@ const ListingDetails = function () {
         <div >
 
             <h1>Listing Details:</h1>
+                    
+            <li className="listingDetails">
+                
+                <div className="item-info">
 
-            <div className="listingDetails">
+                    {/* displays the details of a listing*/}
+                    <p className="item-price">${listing.price}</p>
+                    <p className="item-status"> - {listing.status}</p>
+                    <p className="item-title">{listing.title}</p>
+                    <p className="item-description">{listing.description}</p>
+                    <p className="item-category">{listing.category} · On Campus</p>
 
-                {/* displays the details of a listing*/}
+                </div>
+            </li>
+
+            <br />
+            <br />
+            <h2>Contact Seller:</h2>
+            <div className="contactDetails">
+
+                {/* display seller's name and email*/}
+                <p>{listing.seller.name}</p>
+                <p>{listing.seller.email}</p>
+
+            </div>
+
+                
+
+            {/* </div>
+
                 <h2>Title:</h2>
                 <h3>{listing.title}</h3>
 
@@ -65,7 +91,7 @@ const ListingDetails = function () {
 
                 <h2>Email:</h2>
                 <h3>{listing.seller.email}</h3>
-            </div>
+            </div> */}
 
         </div>
     )

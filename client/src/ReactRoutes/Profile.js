@@ -11,6 +11,11 @@ const Profile = function () {
                 <button id = "createListing">Create Listing</button>
             </Link>
             
+            <div className="userListings">
+
+                <h3>Your Listings:</h3>
+                
+            </div>  
 
         </div>
 

@@ -9,10 +9,9 @@ const Login = function () {
 
 return (
 
-    <div className="login">
-
         <div className="login-container">
-            <img src={logo} alt="Towson University Logo" className="logo"/>
+            
+            <img src={logo} alt="Towson University Logo" id="logo"/>
 
             <h1>TU Marketplace</h1>
             <h2>Login</h2>
@@ -48,7 +47,6 @@ return (
             <p id="error" class="error"></p>
             
         </div>
-    </div>
 )}
 
 export default Login;
