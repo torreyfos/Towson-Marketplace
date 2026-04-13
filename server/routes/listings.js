@@ -85,7 +85,7 @@ router.delete("/:id", tokenAuth, async function (req, res) {
             return res.status(401).json({ message: "Not Authorized To Delete" });
         }
 
-        await Listing.deleteOne();
+        await Listing.deleteOne({_id: req.params.id});
         res.status(200).json({message: "Deletion Successful"});
 
     } catch (error) {
@@ -116,13 +116,13 @@ router.patch("/:id", tokenAuth, async function (req, res) {
         }
 
         //checks to see if the field the user gave exists before saving it to the listing
-        if (title !== undefined) {
+        if (title !== undefined || title !== "" ) {
             updateListing.title = title;
         }
-        if (description !== undefined) {
+        if (description !== undefined || description !== "" ) {
             updateListing.description = description;
         }
-        if (price !== undefined) {
+        if (price !== undefined || price !== "" ) {
             updateListing.price = price;
         }
             updateListing.status = status;

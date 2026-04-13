@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div className="App" >
-      <link rel = "shortcut icon" href = {favicon} ></link>
         <BrowserRouter>
           <HeaderBar />
           <div className="reactRoutes">
