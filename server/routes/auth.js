@@ -31,7 +31,7 @@ router.post('/register', async function (req, res) {
     if (user) {
 
         //if the user exists return a error message
-        return res.status(403).json({message: "User already exists"});
+        return res.status(403).json({message: "Email already exists"});
     }
 
     //hashing the given password

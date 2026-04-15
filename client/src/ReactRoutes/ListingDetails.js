@@ -8,6 +8,7 @@ const ListingDetails = function () {
     const [loading, setLoading] = useState(true);
     const {id} = useParams();
 
+
     useEffect (function () {
 
         const getListing = async function () {
@@ -66,32 +67,6 @@ const ListingDetails = function () {
                 <p>{listing.seller.email}</p>
 
             </div>
-
-                
-
-            {/* </div>
-
-                <h2>Title:</h2>
-                <h3>{listing.title}</h3>
-
-                <h2>Price:</h2>
-                <h3>${listing.price}</h3>
-
-                <h2>Description:</h2>
-                <h3>{listing.description}</h3>
-
-                <h2>Status:</h2>
-                <h3>{listing.status}</h3>
-
-                <h2>Category:</h2>
-                <h3>{listing.category}</h3>
-
-                <h2>Seller: </h2>
-                <h3>{listing.seller.name}</h3>
-
-                <h2>Email:</h2>
-                <h3>{listing.seller.email}</h3>
-            </div> */}
 
         </div>
     )

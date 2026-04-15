@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import logo from "../textbook.jpeg";
+import textbook from "../textbook.jpeg";
+import chair from "../beanbag-chair.webp";
 
 const Homepage = function () {
 
@@ -50,8 +51,12 @@ const Homepage = function () {
                     
                     <li className="item-listing">
 
+                        
                         <div className="item-image">
-                            <img src={logo} alt="Item" />
+                            
+                            {/* <img src={textbook} alt="Item" /> */}
+                            <img src={chair} alt="Item" />
+
                         </div>
                         
                         <div className="item-info">

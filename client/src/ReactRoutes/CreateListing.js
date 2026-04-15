@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useAuthContext} from "../CustomHooks/useAuthContext"
 
 const CreateListing = function () {
 
@@ -7,23 +8,26 @@ const CreateListing = function () {
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("Other");
     const [error, setError] = useState(null);
+    const {user} = useAuthContext();
 
     const handleSubmit = async function (e) {
         e.preventDefault();
 
-        const listing = {title, description, price, category};
+        if (!user) {
+            setError("You must log in")
+            return
+        }
 
-        //gets the user's token to send to the API middleware for verification
-        const token = null;
+        const listing = {title, description, price: Number (price), category};
 
         //sending the created listing to the database
+        console.log(user);
         const response = await fetch ("http://localhost:5000/listings/", {
-
             method: "POST",
             body: JSON.stringify(listing),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${user.token}`
             }
         });
 
@@ -31,11 +35,13 @@ const CreateListing = function () {
 
         //if an error occurs when creating the listing, output it to the console
         if (!response.ok) {
+            console.log("Error: ", response.message)
             setError(jsonResponse.error);
         }
 
         //if there is no error, then reset the form
         if (response.ok) {
+            alert("Listing Created :)")
             setTitle("");
             setDescription("");
             setPrice("");
@@ -69,7 +75,7 @@ const CreateListing = function () {
 
                 <label for = "price">Price:</label>
                 <input id = "price" 
-                    type = "number" 
+                    type = "Number" 
                     min = "0" 
                     max = "500" required
                     onChange = { function (e) {setPrice (e.target.value)} }
@@ -84,7 +90,7 @@ const CreateListing = function () {
                     <option>Essentials</option>
                     <option>School Supplies</option>
                     <option>Furniture</option>
-                    <option selected >Other</option>
+                    <option>Other</option>
                 </select>
 
                 <button >Submit</button>

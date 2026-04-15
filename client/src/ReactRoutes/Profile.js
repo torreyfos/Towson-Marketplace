@@ -1,14 +1,14 @@
 import {Link} from "react-router-dom";
 
+    const Profile = function () {
 
-const Profile = function () {
-    
+
     return (  
         <div className="profile">
             <h1>Profile</h1>
 
-            <Link to = "/create" >
-                <button id = "createListing">Create Listing</button>
+            <Link to = "/create" id = "createListing">
+                <button >Create Listing</button>
             </Link>
             
             <div className="userListings">

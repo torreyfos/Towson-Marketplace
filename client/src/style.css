@@ -476,12 +476,31 @@ header {
 
   /* Profile Page Styling */
 
+.profile {
+    display: block;
+    margin: auto;
+}
+
   #createListing {
     display: block;
     margin: auto;
     width: 20%;
     border-radius: 0.7rem;
   }
+
+#createListing button {
+    display: block;
+    margin: auto;
+    border-radius: 0.7rem;
+    font-size: 17px;
+  }
+
+#logoutButton {
+    display: block;
+    width: 20%;
+    margin-left: 80%;
+    margin-bottom: 10%;
+}
 
   /* Create Lisitng Page Styling */
 
@@ -561,4 +580,26 @@ header {
 
 .listingDetails .item-price {
     display: inline;
+}
+
+/* Register Page Styling */
+
+.signup-container {
+
+    display: block;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}
+
+.signup-container button {
+    width: 102.5%;
+    border-radius: 1.5rem;
+}
+
+/* Login Page Styling */
+
+#redirect {
+    justify-content: center;
+    color:#c79816;
 }

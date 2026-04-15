@@ -1,23 +1,29 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = function (req, res, next) {
+const tokenAuth = function (req, res, next) {
   
- //get token from header
- const token = req.header("Authorization")?.replace("Bearer ", "");
+  //get the header from the request
+  const {authorization} = req.headers
 
-  //check if token exists
-  if (!token) {
-    return res.status(401).json({ message: "No token, authorization denied" });
+  //checks to see if the header was sent
+  if (!authorization) {
+    return res.status(401).json({message: "No header found"})
   }
+
+  //extract token from header
+  const token = authorization.split(" ")[1];
 
   //verify token
   try {
     const decoded = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
-    req.user = decoded; // {_id: ...}
+    //req.user stores the user document id for the current user
+    req.user = decoded;
     next();
 
   } catch (err) {
 
     res.status(401).json({ message: "Invalid Token"});
   }
-};
+}
+
+module.exports = tokenAuth;
