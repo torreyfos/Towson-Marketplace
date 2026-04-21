@@ -100,7 +100,6 @@ function displayItems(items) {
 
             <p><strong>Seller:</strong> ${item.seller}</p>
 
-                <!-- ⭐ RATE USER -->
                 <div class="rating-section">
                     <p>Rate Seller:</p>
                     <div class="stars" data-seller="${item.seller}">
@@ -119,13 +118,20 @@ function displayItems(items) {
     addStarListeners();}
 
     function addStarListeners() {
+    let alreadyRated = false;
+
     document.querySelectorAll(".star").forEach(star => {
         star.addEventListener("click", function () {
+
+            if (alreadyRated) return;
+            alreadyRated = true;
+
             const rating = this.dataset.value;
             const container = this.parentElement;
             const seller = container.dataset.seller;
 
             const stars = container.querySelectorAll(".star");
+
             stars.forEach(s => s.classList.remove("selected"));
 
             for (let i = 0; i < rating; i++) {
@@ -137,7 +143,7 @@ function displayItems(items) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     sellerEmail: seller,
-                    rating: rating,
+                    rating,
                     fromUser: localStorage.getItem("user")
                 })
             });
