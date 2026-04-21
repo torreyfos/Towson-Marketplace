@@ -2,16 +2,20 @@ const BASE_URL = "http://localhost:5000/api/items";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
+    const darkBtn = document.getElementById("darkModeToggle");
 
     if (form) {
         form.addEventListener("submit", handleLogin);
+    }
+
+    if (darkBtn) {
+        darkBtn.addEventListener("click", toggleDarkMode);
     }
 
     if (document.getElementById("itemsList")) {
         loadAllItems();
     }
 });
-
 function handleLogin(event) {
     event.preventDefault();
 
@@ -67,6 +71,10 @@ async function searchItems() {
     }
 }
 
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
+
 function displayItems(items) {
     const list = document.getElementById("itemsList");
     list.innerHTML = "";
@@ -89,9 +97,50 @@ function displayItems(items) {
             <p class="item-title">${item.title}</p>
             <p class="item-description">${item.description || "No description provided"}</p>
             <p class="item-category">${item.category} · ${item.location || "Location TBD"}</p>
+
+            <p><strong>Seller:</strong> ${item.seller}</p>
+
+                <!-- ⭐ RATE USER -->
+                <div class="rating-section">
+                    <p>Rate Seller:</p>
+                    <div class="stars" data-seller="${item.seller}">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
             </div>
         `;
-
         list.appendChild(li);
+    });
+
+    addStarListeners();}
+
+    function addStarListeners() {
+    document.querySelectorAll(".star").forEach(star => {
+        star.addEventListener("click", function () {
+            const rating = this.dataset.value;
+            const container = this.parentElement;
+            const seller = container.dataset.seller;
+
+            const stars = container.querySelectorAll(".star");
+            stars.forEach(s => s.classList.remove("selected"));
+
+            for (let i = 0; i < rating; i++) {
+                stars[i].classList.add("selected");
+            }
+
+            fetch("http://localhost:5000/rate-user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    sellerEmail: seller,
+                    rating: rating,
+                    fromUser: localStorage.getItem("user")
+                })
+            });
+        });
     });
 }
