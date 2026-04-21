@@ -235,3 +235,28 @@ header {
     background-color: #FFBB00;
     color: black;
   }
+.dark-mode {
+    background-color: #121212;
+    color: #FFBB00;
+}
+
+.dark-mode header {
+    background-color: #1e1e1e;
+}
+
+.dark-mode .item-listing {
+    background-color: #1e1e1e;
+}
+.rating-section {
+    margin-top: 10px;
+}
+
+.star {
+    font-size: 20px;
+    cursor: pointer;
+    color: gray;
+}
+
+.star.selected {
+    color: gold;
+}
