@@ -235,6 +235,12 @@ header {
     background-color: #FFBB00;
     color: black;
   }
+
+body.dark-mode {
+    background-color: #121212;
+    color: #FFBB00;
+}
+
 .dark-mode {
     background-color: #121212;
     color: #FFBB00;
