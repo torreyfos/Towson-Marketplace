@@ -14,10 +14,10 @@ function App() {
   const {user} = useAuthContext();
 
   return (
-    <div className="App" >
+    <div className = "App" >
         <BrowserRouter>
           <HeaderBar />
-          <div className="reactRoutes">
+          <div className = "reactRoutes">
             <Routes>
 
               <Route 
@@ -32,7 +32,7 @@ function App() {
 
               <Route 
                 path = "/profile"
-                element = {<Profile />}
+                element = {user ? <Profile /> : <Navigate to = "/" />}
               />
 
               <Route 

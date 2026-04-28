@@ -25,9 +25,9 @@ const Homepage = function () {
 
     return (
 
-    <div className="container">
+    <div className = "container">
 
-        <div className="search-container">
+        <div className = "search-container">
             <input type="text" id="searchInput" placeholder="Search items..." />
         
             <label for="category">Category:</label>
@@ -44,29 +44,29 @@ const Homepage = function () {
 
         <h2>Available Items</h2>
         
-        <div className="listings">
+        <div className = "listings">
             {listings && listings.map( (listings) => (
 
                 <div className = "eachListing" key = {listings._id}>
                     
-                    <li className="item-listing">
+                    <li className = "item-listing">
 
                         
-                        <div className="item-image">
+                        <div className = "item-image">
                             
                             {/* <img src={textbook} alt="Item" /> */}
                             <img src={chair} alt="Item" />
 
                         </div>
                         
-                        <div className="item-info">
+                        <div className = "item-info">
 
                             <Link to = {`/ListingDetails/${listings._id}`}>
 
-                                <p className="item-price">${listings.price}</p>
-                                <p className="item-title">{listings.title}</p>
-                                <p className="item-description">{listings.description}</p>
-                                <p className="item-category">{listings.category} · On Campus</p>
+                                <p className = "item-price">${listings.price}</p>
+                                <p className = "item-title">{listings.title}</p>
+                                <p className = "item-description">{listings.description}</p>
+                                <p className = "item-category">{listings.category} · On Campus</p>
                             </Link>
 
                         </div>

@@ -16,9 +16,9 @@ const HeaderBar = function () {
 
 return (
 
-    <header className="headerbar">
+    <header className = "headerbar">
 
-        <img src={favicon} alt="TU Logo" className="logo-small" />
+        <img src={favicon} alt="TU Logo" className = "logo-small" />
         <h1>TU Marketplace</h1>
 
         <nav>

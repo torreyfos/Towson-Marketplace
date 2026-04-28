@@ -49,7 +49,7 @@ const Login = function () {
 
 return (
 
-        <div className="login-container">
+        <div className = "login-container">
             
             <img src={logo} alt="Towson University Logo" id="logo"/>
 
@@ -74,7 +74,7 @@ return (
                     value = {password}
                     />
 
-                <p id="error" className="error">{error}</p>
+                <p id="error" className = "error">{error}</p>
                 <button type="submit">Login</button>
 
                 <br />

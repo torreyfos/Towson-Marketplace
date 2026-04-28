@@ -4,14 +4,14 @@ import {Link} from "react-router-dom";
 
 
     return (  
-        <div className="profile">
+        <div className = "profile">
             <h1>Profile</h1>
 
             <Link to = "/create" id = "createListing">
                 <button >Create Listing</button>
             </Link>
             
-            <div className="userListings">
+            <div className = "userListings">
 
                 <h3>Your Listings:</h3>
                 

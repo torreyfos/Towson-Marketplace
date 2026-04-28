@@ -55,10 +55,10 @@ const CreateListing = function () {
 
     return (
 
-        <div className="createContainer">
+        <div className = "createContainer">
             <h1>Add New Listing:</h1>
 
-            <form className="createForm" onSubmit = {handleSubmit}>
+            <form className = "createForm" onSubmit = {handleSubmit}>
 
                 <label for = "title">Title:</label>
                 <input id = "title" 
@@ -77,7 +77,7 @@ const CreateListing = function () {
                 <input id = "price" 
                     type = "Number" 
                     min = "0" 
-                    max = "500" required
+                    max = "1500" required
                     onChange = { function (e) {setPrice (e.target.value)} }
                     value = {price}
                 />

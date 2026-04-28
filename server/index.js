@@ -35,4 +35,4 @@ app.use('/auth', require('./routes/auth'));
 //will run the "/routes/listings.js" file when "/listings" is in the URL
 app.use("/listings", require("./routes/listings"));
 
-
+app.use("/contact-seller", require("./routes/contact-seller"));

@@ -51,7 +51,7 @@ const Register = function () {
     };
 
     return (
-        <div className="signup-container">
+        <div className = "signup-container">
             <h1>TU Marketplace Sign-up</h1>
             <form onSubmit={handleSignup}>
                 <label>Full Name:</label><br />
