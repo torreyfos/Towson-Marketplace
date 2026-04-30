@@ -7,6 +7,7 @@ import Register from "./ReactRoutes/Register";
 import CreateListing from "./ReactRoutes/CreateListing";
 import ListingDetails from "./ReactRoutes/ListingDetails";
 import AboutUs from "./ReactRoutes/AboutUs";
+import EditListing from "./ReactRoutes/EditListing";
 import { useAuthContext } from "./CustomHooks/useAuthContext";
 
 function App() {
@@ -54,6 +55,11 @@ function App() {
                 path = "/aboutUs"
                 element = {<AboutUs />}
               /> 
+
+              <Route 
+                path = "/edit/:id"
+                element = {user ? <EditListing /> : <Navigate to = "/auth/login" /> }
+              />
 
             </Routes>
           </div>

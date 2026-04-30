@@ -95,13 +95,13 @@ router.post('/login', async function (req, res) {
 
 
 
-//DELETE /auth/delete/:id
+//DELETE /auth/delete
 //deletes a specific user
-router.delete("/delete/:id", tokenAuth, async function (req, res) {
+router.delete("/delete", tokenAuth, async function (req, res) {
 
   try {
 
-    if (req.params.id !== req.user._id) {
+    if (!req.user._id) {
 
       return res.status(401).json({message: "Not authorized to delete this user"})
     }
@@ -117,7 +117,7 @@ router.delete("/delete/:id", tokenAuth, async function (req, res) {
       return res.status(404).json({message: "User Doesn't Exist"})
     }
     
-    res.status(200).json({message: "Deleted Successfuly"})
+    res.status(200).json({message: "Deleted Account Successfuly"})
 
   } catch (error) {
 

@@ -23,6 +23,45 @@ router.get("/", async function (req, res) {
 
 });
 
+
+
+//POST /listings/
+//creates a new listing
+router.post("/", tokenAuth, async function (req, res) {
+
+    const {title, description, price, status, category} = req.body;
+
+    try {
+
+        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category});
+        res.status(201).json(newListing);
+
+    } catch (error) {
+
+        console.error(error.message);
+        res.status(400).json({error: error.message});
+    }
+
+});
+
+
+
+//GET /listings/my
+//returns all of a specific user's listings
+router.get("/my", tokenAuth, async function (req, res) {
+
+    try {
+        const userListings = await Listing.find({seller: req.user._id}).sort({createdAT: -1}).populate("seller", "name email");
+        res.status(200).json(userListings);
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).json({error: error.messgae});
+    }
+});
+
+
+
 //GET /listings/:id
 //retrieves a single listing based on a specified id
 router.get("/:id", async function (req, res) {
@@ -47,24 +86,8 @@ router.get("/:id", async function (req, res) {
     
 });
 
-//POST /listings/
-//creates a new listing
-router.post("/", tokenAuth, async function (req, res) {
 
-    const {title, description, price, status, category} = req.body;
 
-    try {
-
-        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category});
-        res.status(201).json(newListing);
-
-    } catch (error) {
-
-        console.error(error.message);
-        res.status(400).json({error: error.message});
-    }
-
-});
 
 //DELETE /listings/:id
 //deletes a single listing based on a specified id
@@ -94,6 +117,8 @@ router.delete("/:id", tokenAuth, async function (req, res) {
         res.status(400).json({error: error.message});
     }
 })
+
+
 
 //UPDATE /listings/:id
 //allows a user to update one of their listings

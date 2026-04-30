@@ -6,22 +6,43 @@ import chair from "../beanbag-chair.webp";
 const Homepage = function () {
 
     const [listings, setListings] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
     //gets all listings when the page renders/loads
     useEffect( function () {
         const getListings = async function () {
 
-            //calls the api to get all the listings from the database
-            const response = await fetch("http://localhost:5000/listings/");
-            const json = await response.json();
+            try {
 
-            if (response.ok) {
-                setListings(json);
+                //calls the api to get all the listings from the database
+                const response = await fetch("http://localhost:5000/listings/");
+                const json = await response.json();
+
+                if (response.ok) {
+                    setListings(json);
+                }
+
+            } catch (error) {
+                setError(error.message);
+
+            } finally {
+                setLoading(false);
             }
         }
 
         getListings();
     }, []);
+
+    if (loading) {
+            return <h2 className = "loading-text">Loading your listings...</h2>;
+        }
+
+    if (error) {
+        return <p className = "error">Error: {error} </p>;
+    }
+
+
 
     return (
 

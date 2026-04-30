@@ -84,7 +84,7 @@ const ListingDetails = function () {
 
                 {/* status and price */}
                 <div className = "card-top-row">
-                    <span className = "status-available">Available</span>
+                    <span className = "status-available">{listing.status}</span>
                     <span className = "listing-price">${listing.price}</span>
                 </div>
 
