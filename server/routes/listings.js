@@ -29,11 +29,11 @@ router.get("/", async function (req, res) {
 //creates a new listing
 router.post("/", tokenAuth, async function (req, res) {
 
-    const {title, description, price, status, category, images} = req.body;
+    const {title, description, price, status, category} = req.body;
 
     try {
 
-        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category, images: images || []});
+        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category});
         res.status(201).json(newListing);
 
     } catch (error) {
