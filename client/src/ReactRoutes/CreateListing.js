@@ -10,6 +10,7 @@ const CreateListing = function () {
     const [error, setError] = useState(null);
     const {user} = useAuthContext();
 
+    //---------------------------------handles submitting the form----------------------------------------------------
     const handleSubmit = async function (e) {
         e.preventDefault();
 
@@ -49,8 +50,9 @@ const CreateListing = function () {
             setError(null);
             console.log("Listing Created :)", jsonResponse)
         }
-
     }
+//---------------------------------------------------------------------------------------------------------------
+
 
 
     return (

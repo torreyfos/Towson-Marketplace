@@ -266,7 +266,7 @@ header {
     color: black;
   }
 
-  /* -----------------Profile Page Styling-------------------------*/
+  /* -----------------------------------------Profile Page Styling-----------------------------------------*/
 
 
 .profile {
@@ -453,7 +453,7 @@ header {
 }
 
 
-  /*------------------------Create Lisitng & Edit Listing Page Styling---------------------------- */
+  /*----------------------------------------Create Lisitng & Edit Listing Page Styling---------------------------- */
 
 .createContainer {
   max-width: 600px;
@@ -560,7 +560,8 @@ header {
   margin-bottom: 0.5rem;
 }
 
-/*------------------- Homepage Styling ------------------------------*/
+
+/*--------------------------------------------- Homepage Styling ------------------------------*/
 
 .search-container {
     display: block;
@@ -572,7 +573,7 @@ header {
     color: black;
 } 
 
-/* ------ ListingDetails Page Styling ----- */
+/* ------------------------------------------ ListingDetails Page Styling ----------------------- */
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -811,7 +812,8 @@ body {
     text-align: center;
 }
 
-/* Register Page Styling */
+
+/*--------------------------------------- Register Page Styling ------------------------------------------------- */
 
 .signup-container {
 
@@ -826,7 +828,7 @@ body {
     border-radius: 1.5rem;
 }
 
-/* Login Page Styling */
+/*-------------------------------------------------- Login Page Styling --------------------------------------------------*/
 
 #redirect {
     justify-content: center;

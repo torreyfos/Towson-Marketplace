@@ -29,11 +29,11 @@ router.get("/", async function (req, res) {
 //creates a new listing
 router.post("/", tokenAuth, async function (req, res) {
 
-    const {title, description, price, status, category} = req.body;
+    const {title, description, price, status, category, images} = req.body;
 
     try {
 
-        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category});
+        const newListing = await Listing.create({title, description, price, status, seller: req.user._id, category, images: images || []});
         res.status(201).json(newListing);
 
     } catch (error) {
@@ -62,6 +62,38 @@ router.get("/my", tokenAuth, async function (req, res) {
 
 
 
+//GET /listings/search
+//searches for specific listings based on the title and category sent from the client
+router.get("/search", async function (req, res) {
+
+    try {
+        const { searchTitle, searchCategory } = req.query;
+        let filter = {};
+
+        //create the filter object
+        if (searchTitle && searchTitle.trim() !== "") {
+
+            //case‑insensitive partial match on title
+            filter.title = { $regex: searchTitle, $options: "i" };
+        }
+
+        if (searchCategory && searchCategory.trim() !== "" && searchCategory !== "All") {
+            filter.category = searchCategory;
+        }
+
+        //if both are empty/All, filter stays {} and returns all listings
+        const searchedListings = await Listing.find(filter).sort({ createdAt: -1 }).populate("seller", "name email");
+
+        res.status(200).json(searchedListings);
+
+    } catch (error) {
+        console.error("Search error:", error.message);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+
+
 //GET /listings/:id
 //retrieves a single listing based on a specified id
 router.get("/:id", async function (req, res) {
@@ -80,7 +112,7 @@ router.get("/:id", async function (req, res) {
         res.status(200).json(listing);
     } catch (error) {
 
-        console.error(error.message);
+        console.error("Search error: ", error.message);
         res.status(400).json({error: error.message});
     }
     
@@ -93,22 +125,22 @@ router.get("/:id", async function (req, res) {
 //deletes a single listing based on a specified id
 router.delete("/:id", tokenAuth, async function (req, res) {
 
-    const listing = await Listing.findById(req.params.id);
-
     try {
 
+        const listingToDelete = await Listing.findById(req.params.id);
+
         //checks to see if the listing exists
-        if (!listing) {
+        if (!listingToDelete) {
 
             return res.status(404).json({messsage: "Can't Delete; Listing Doesn't Exist"});
         }
 
         //checks to see if the user owns this lisitng
-        if (listing.seller.toString() !== req.user._id) {
+        if (listingToDelete.seller.toString() !== req.user._id) {
             return res.status(401).json({ message: "Not Authorized To Delete" });
         }
 
-        await Listing.deleteOne({_id: req.params.id});
+        await Listing.deleteOne(listingToDelete);
         res.status(200).json({message: "Deletion Successful"});
 
     } catch (error) {
@@ -120,7 +152,7 @@ router.delete("/:id", tokenAuth, async function (req, res) {
 
 
 
-//UPDATE /listings/:id
+//PATCH /listings/:id
 //allows a user to update one of their listings
 router.patch("/:id", tokenAuth, async function (req, res) {
 

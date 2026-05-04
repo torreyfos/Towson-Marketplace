@@ -49,13 +49,14 @@ const EditListing = function () {
         }
 
     }, [id, user]);
-//------------------------------------------------------------------------------------------
 
-    //-------------------handles sending the PATCH request------------------------------------------ 
+//--------------------------------------------------------------------------------------------------------------------
+
+    //---------------------------------handles sending the PATCH request------------------------------------------ 
     const handleSubmit = async function (e) {
 
         e.preventDefault();
-        const listing = { title, description, price: Number(price), category, status };
+        const listing = { title, description, price: Number(price), category, status};
 
         try {
             

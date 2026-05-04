@@ -78,8 +78,9 @@ const ListingDetails = function () {
 
                 {/* images */}
                 <div className = "image-gallery">
-                    No images uploaded
+                    <p>No images uploaded</p>
                 </div>
+                                
                 <hr className = "card-divider" />
 
                 {/* status and price */}
