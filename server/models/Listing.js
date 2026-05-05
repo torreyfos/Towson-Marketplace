@@ -38,6 +38,17 @@ const listingSchema = new mongoose.Schema({
         enum: ["Essentials", "School Supplies", "Furniture", "Other"],
         default: "Other",
         required: true,
+    },
+
+    images: {
+        type: [String],
+        default: [],
+        validate: {
+            validator: function(arr) {
+                return arr.length <= 5;
+            },
+            message: 'A listing can have a maximum of 5 images'
+        }
     }
 
 }, {timestamps: true});

@@ -6,26 +6,39 @@ const CreateListing = function () {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("Other");
+    const [images, setImages] = useState([]);
+    const [fileKey, setFileKey] = useState(0);
     const [error, setError] = useState(null);
 
     const handleSubmit = async function (e) {
         e.preventDefault();
+        console.log("handlesubmit fired");
 
-        const listing = {title, description, price, category};
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('category', category);
+        
+        for (let i = 0; i < images.length; i++) {
+            formData.append('images', images[i]);
+        }
 
-        //gets the user's token to send to the API middleware for verification
-        const token = null;
+        const token = localStorage.getItem('token');
+        console.log("token:", token);
+        console.log("about to fetch...");
+
 
         //sending the created listing to the database
         const response = await fetch ("http://localhost:5000/listings/", {
 
             method: "POST",
-            body: JSON.stringify(listing),
+            body: formData,
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+               "Authorization": `Bearer ${token}`
             }
         });
+        console.log("fetch response status:", response.status)
 
         const jsonResponse = await response.json();
 
@@ -40,6 +53,8 @@ const CreateListing = function () {
             setDescription("");
             setPrice("");
             setCategory("Other");
+            setImages([]);
+            setFileKey(prev => prev + 1);
             setError(null);
             console.log("Listing Created :)", jsonResponse)
         }
@@ -87,7 +102,23 @@ const CreateListing = function () {
                     <option selected >Other</option>
                 </select>
 
-                <button >Submit</button>
+                <label htmlFor="images">Upload Images (up to 5)</label>
+                <input
+                    key={fileKey}
+                    id="images"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => {
+                        if(e.target.files.length > 5){
+                            setError("Maximum 5 images allowed");
+                            return;
+                        }
+                        setImages(e.target.files);
+                    }}
+                    />
+
+                <button type="submit">Submit</button>
                 {error && <div>{error}</div>}
 
             </form>

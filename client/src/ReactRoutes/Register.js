@@ -23,8 +23,14 @@ const Register = function () {
                 body: JSON.stringify({ name, email, password: psw })
             });
             const result = await res.json();
-            console.log("Account created", result);
-            alert("Account created! Please login.");
+
+        if (!res.ok) {
+            setError(result.message);
+            return;
+        }
+
+        alert("Account created! Please login.");
+        
         } catch (err) {
             console.error("Signup error", err);
         }

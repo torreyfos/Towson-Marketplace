@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import logo from "../textbook.jpeg";
 
 const Homepage = function () {
 
@@ -51,7 +50,8 @@ const Homepage = function () {
                     <li className="item-listing">
 
                         <div className="item-image">
-                            <img src={logo} alt="Item" />
+                            <img src={listings.images && listings.images[0] ? listings.images [0] : "placeholder.png"} 
+                            alt = {listings.title} />
                         </div>
                         
                         <div className="item-info">
