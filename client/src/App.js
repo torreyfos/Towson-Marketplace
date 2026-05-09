@@ -1,5 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import favicon from "./Towson_Marketplace_Favicon.png";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Login from "./ReactRoutes/Login";
 import Homepage from "./ReactRoutes/Homepage";
 import HeaderBar from "./Components/HeaderBar";
@@ -8,16 +7,18 @@ import Register from "./ReactRoutes/Register";
 import CreateListing from "./ReactRoutes/CreateListing";
 import ListingDetails from "./ReactRoutes/ListingDetails";
 import AboutUs from "./ReactRoutes/AboutUs";
-
+import EditListing from "./ReactRoutes/EditListing";
+import { useAuthContext } from "./CustomHooks/useAuthContext";
 
 function App() {
 
+  const {user} = useAuthContext();
+
   return (
-    <div className="App" >
-      <link rel = "shortcut icon" href = {favicon} ></link>
+    <div className = "App" >
         <BrowserRouter>
           <HeaderBar />
-          <div className="reactRoutes">
+          <div className = "reactRoutes">
             <Routes>
 
               <Route 
@@ -27,17 +28,17 @@ function App() {
 
               <Route 
                 path = "/auth/login"
-                element = {<Login />}
+                element = {!user ? <Login /> : <Navigate to = "/" />}
               />
 
               <Route 
                 path = "/profile"
-                element = {<Profile />}
+                element = {user ? <Profile /> : <Navigate to = "/" />}
               />
 
               <Route 
                 path = "/auth/register"
-                element = {<Register />}
+                element = {!user ? <Register /> : <Navigate to = "/" />}
               />
 
               <Route 
@@ -47,13 +48,18 @@ function App() {
 
               <Route 
                 path = "/ListingDetails/:id"
-                element = {<ListingDetails />}
+                element = {user ? <ListingDetails /> : <Navigate to = "/auth/login"/> }
               /> 
-
+              
               <Route 
                 path = "/aboutUs"
                 element = {<AboutUs />}
               /> 
+
+              <Route 
+                path = "/edit/:id"
+                element = {user ? <EditListing /> : <Navigate to = "/auth/login" /> }
+              />
 
             </Routes>
           </div>

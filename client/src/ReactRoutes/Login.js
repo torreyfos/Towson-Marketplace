@@ -1,52 +1,47 @@
 import logo from "../Towson-Marketplace-Logo.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../CustomHooks/useAuthContext";
 
 const Login = function () {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
+    const { dispatch } = useAuthContext();
 
     const handleLogin = async function (e) {
         e.preventDefault();
 
-        if (!email.endsWith("@students.towson.edu")) {
-            setError("Please use your Towson email");
-            return;
-        }
-        if (!password.trim()) {
-            setError("Password is required");
-            return;
-        }
+        if (!email.trim() || !email.endsWith("@students.towson.edu")) { setError("Please use your Towson email"); return; }
+        if (!password.trim()) { setError("Please enter a password"); return; }
+        if (password.length < 8) { setError("Password must be at least 8 characters"); return; }
 
         try {
-            const response = await fetch("http://localhost:5000/auth/login", {
+            const res = await fetch("http://localhost:5000/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
 
-            const result = await response.json();
+            const result = await res.json();
 
-            if (!response.ok) {
-                setError(result.message);
-                return;
+            if (res.ok) {
+                localStorage.setItem("user", JSON.stringify(result));
+                dispatch({ type: "LOGIN", payload: result });
+                alert("Login Successful!");
+            } else {
+                setError("Couldn't login: " + result.message);
             }
 
-            localStorage.setItem("token", result.token);
-            localStorage.setItem("user", result.email);
-            navigate("/");
-
         } catch (err) {
-            setError("Something went wrong. Try again.");
+            console.error("Login error", err);
         }
     };
 
     return (
         <div className="login-container">
-            <img src={logo} alt="Towson University Logo" id="logo"/>
+            <img src={logo} alt="Towson University Logo" id="logo" />
             <h1>TU Marketplace</h1>
             <h2>Login</h2>
 
@@ -58,6 +53,7 @@ const Login = function () {
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                 />
+
                 <input type="password"
                     id="password"
                     placeholder="Password"
@@ -65,9 +61,14 @@ const Login = function () {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                 />
+
+                <p id="error" className="error">{error}</p>
                 <button type="submit">Login</button>
+                <br />
+                <Link to="/auth/register" id="redirect">
+                    <h4>Don't Have An Account? Register</h4>
+                </Link>
             </form>
-            {error && <p style={{color: "red"}}>{error}</p>}
         </div>
     );
 }

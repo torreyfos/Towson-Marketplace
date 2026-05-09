@@ -1,64 +1,51 @@
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
 
-/*
+:root {
+    --bg-primary: #1e1e1e;
+    --bg-secondary: #2a2a2a;
+    --bg-card: #252525;
+    --bg-hover: #333333;
+    --accent: #FFBB00;
+    --accent-hover: #e6a800;
+    --text-primary: #f0f0f0;
+    --text-secondary: #aaaaaa;
+    --text-dark: #1c1e21;
+    --border: #3a3a3a;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --success-bg: #1a3a1a;
+    --success-text: #4caf50;
+    --error-bg: #3a1a1a;
+    --error-text: #f44336;
+}
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: Arial;
-    background-color: black;
-    color: #FFBB00;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h1, h2 {
     text-align: center;
+    color: var(--accent);
 }
 
-.header {
-    text-align: center;
-    padding: 10px;
-    border-bottom: 2px solid #FFBB00;
-}
-
-.login-container .logo {
-    width: 250px;
-    display: block;
-    margin: auto;
-}
-
-.logo-small {
-    width: 60px;
-}
-
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    text-align: center;
-}
-
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: none;
-}
-
-button {
-    background-color: #FFBB00;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #e6bc00;
-}
-
-.container {
-    padding: 20px;
-    width: 60%;
-    margin: auto;
-}
-
-.search-bar {
-    margin-bottom: 20px;
+a {
+    text-decoration: none;
 }
 
 ul {
@@ -66,232 +53,930 @@ ul {
     padding: 0;
 }
 
-.item-card {
-    background-color: #111;
-    border: 1px solid #FFD100;
-    padding: 15px;
-    margin: 10px 0;
-}
-
 .error {
-    color: red;
+    color: var(--error-text);
 }
 
-*/
-
-/* Header Bar Styling */
-
-/*
-
-.headerbar #favicon {
-
-    width:100px;
-    height: 3rem;
-    border-radius: 0.5rem;
+.loading-text {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
 }
 
-.headerbar p {
+/* ============================================================
+   GLOBAL INPUTS & BUTTONS
+   ============================================================ */
 
-    margin-left: 5rem;
-    display: inline;
-
-}
-
-.headerbar a {
-
-    color: #FFBB00;
-}
-
-.headerbar {
-
-    position: sticky;
-    top: 0rem;
-    background-color: rgb(42, 41, 41);
-    text-decoration: none;
+input, select, textarea {
     width: 100%;
-    height: 5rem;
-}
-
-*/
-
-/* Homepage Styling */
-
-/*
-
-.listings {
-
-    background-color: rgb(248, 182, 16);
-    padding-bottom: 100%;
-    padding-top: 1%;
-}
-
-.eachListing {
-    display: block;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: #888888;
-    margin: 1rem;
-}
-
-.eachListing:hover {
-
-    transform:scale(1.05);
-    box-shadow: 10px 10px 8px rgb(42, 41, 41);
-}
-
-#homepageLogo {
-    width: 20rem;
-    display: block;
-    margin: auto;
-}
-
-*/
-
-/* Profile Page Styling */
-
-/*
-
-#createListing {
-    display: block;
-    margin: auto;
-    width: 20rem;
-}
-
-*/
-
-/* Create Lisitng Page Styling */
-
-/*
-
-.createForm {
-    display: block;
-    margin: auto;
-    width: 35rem;
-}
-
-.createForm textarea {
-   
-    height: 10rem;
-    width: 36rem;
-    resize: none;
-    margin-bottom: 5rem;
-}
-
-.createForm input {
-   margin-bottom: 5rem;
-}
-
-.createForm button {
-   margin-top: 5rem;
-   margin-bottom: 5rem;
-}
-
-*/
-
-/* Listing Details Page Styling */
-
-/*
-
-.listingDetails {
-    background-color: rgb(42, 41, 41);
-    padding:5%;
-    border-radius: 5%;
-    border: rgb(185, 140, 16) double 0.5rem;
-    width: 40%;
-    margin: auto;
-}
-
-.listingDetails h2 {
-    color:rgb(255, 255, 255);
-}
-
-*/
-
-body {
-    margin: 0;
-    font-family: Arial;
-    background-color: rgb(255, 255, 255);
-    color: #FFBB00;
-}
-
-h1, h2 {
-    text-align: center;
-}
-
-.header {
-    text-align: center;
     padding: 10px;
-    border-bottom: 2px solid #FFBB00;
+    margin: 8px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 187, 0, 0.15);
+}
+
+input::placeholder {
+    color: var(--text-secondary);
+}
+
+button {
+    background-color: var(--accent);
+    color: var(--text-dark);
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.container {
+    padding: 20px;
+    flex: 1;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--accent);
+    background-color: var(--bg-secondary);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--accent);
+    text-align: left;
+}
+
+.logo-small {
+    width: 60px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+nav a:hover {
+    background-color: var(--accent);
+    color: var(--text-dark);
+}
+
+nav button {
+    width: auto;
+    padding: 6px 14px;
+    margin: 0;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+
+.login-container {
+    width: 340px;
+    margin: 80px auto;
+    text-align: center;
+    border-radius: 12px;
+    padding: 36px 30px;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 8px 32px var(--shadow);
+    line-height: 1.7;
+    border: 1px solid var(--border);
+}
+
+.login-container h1,
+.login-container h2 {
+    color: var(--accent);
 }
 
 #logo {
-    width: 270px;
+    width: 200px;
     display: block;
-    margin: auto;
+    margin: auto auto 16px;
 }
 
-.logo-small {
-    width: 60px;
+#redirect {
+    color: var(--accent);
+    font-size: 14px;
 }
 
-.login-container {
-    width: 300px;
-    margin: 100px auto;
-    text-align: center;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 60px 100px rgba(0,0,0,0.1);
-    line-height: 1.7;
-  
+/* ============================================================
+   REGISTER PAGE
+   ============================================================ */
+
+.signup-container {
+    display: block;
+    width: 50%;
+    margin: 40px auto;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px var(--shadow);
 }
 
-input, select {
+.signup-container h1 {
+    color: var(--accent);
+}
+
+.signup-container button {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid;
-    border-radius: 15px;
-
+    border-radius: 8px;
 }
 
-button {
-    background-color: #FFBB00;
-    color: black;
-    font-weight: bold;
+/* ============================================================
+   HOMEPAGE
+   ============================================================ */
+
+.search-container {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.search-container label {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.listings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding: 0 4px;
+}
+
+.listings-header h2 {
+    text-align: left;
+    margin: 0;
+}
+
+.listing-count {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.home-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 10px 0;
+}
+
+.home-listing-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+.home-listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px var(--shadow);
+}
+
+.home-card-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.home-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.badge-available {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.badge-sold {
+    background: var(--error-bg);
+    color: var(--error-text);
+}
+
+.category-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.home-card-body {
+    padding: 16px;
+}
+
+.home-card-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0 0 6px 0;
+}
+
+.home-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+}
+
+.home-card-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 8px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.home-card-seller {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.home-card-actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+}
+
+.btn-details {
+    flex: 1;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 6px;
     cursor: pointer;
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
+    font-size: 13px;
+    transition: background 0.2s;
+    width: auto;
+    margin: 0;
+}
+
+.btn-details:hover {
+    background: var(--bg-hover);
+}
+
+.btn-contact {
+    flex: 1;
+    padding: 8px;
+    background: var(--accent);
     border: none;
+    color: var(--text-dark);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s;
+    width: auto;
+    margin: 0;
 }
 
-button:hover {
-    background-color: #e6bc00;
+.btn-contact:hover {
+    background: var(--accent-hover);
 }
 
-.container {
-    padding: 20px;
+/* ============================================================
+   PROFILE PAGE
+   ============================================================ */
+
+.profile {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
 }
 
-.search-bar {
+.profile h1 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.profile-actions {
+    display: inline-flex;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 30px;
+}
+
+.create-listing-btn button {
+    background-color: var(--accent);
+    color: var(--text-dark);
+    font-weight: bold;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: auto;
+}
+
+.create-listing-btn button:hover {
+    background-color: var(--accent-hover);
+}
+
+.user-listings h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
     margin-bottom: 20px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+.no-listings {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
 }
 
-.error {
-    color: red;
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
 }
 
-/* item listing */
+.listing-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--border);
+}
+
+.listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px var(--shadow);
+}
+
+.card-image {
+    width: 100%;
+    height: 180px;
+    background: var(--bg-secondary);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.listing-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+}
+
+.listing-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    height: 40px;
+    overflow: hidden;
+}
+
+.listing-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+.meta-price {
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.meta-category {
+    background: var(--bg-hover);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.meta-status {
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status-avail {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.status-sold {
+    background: var(--error-bg);
+    color: var(--error-text);
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.card-actions button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: auto;
+    margin: 0;
+}
+
+.edit-btn {
+    background-color: rgba(255, 187, 0, 0.15);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.edit-btn:hover {
+    background-color: rgba(255, 187, 0, 0.25);
+}
+
+.delete-btn {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+}
+
+.delete-btn:hover {
+    background-color: #4a1a1a;
+}
+
+/* ============================================================
+   CREATE & EDIT LISTING PAGE
+   ============================================================ */
+
+.createContainer {
+    max-width: 600px;
+    width: 90%;
+    margin: 40px auto;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 32px 36px;
+    box-shadow: 0 4px 16px var(--shadow);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+@media (max-width: 480px) {
+    .createContainer {
+        padding: 24px 20px;
+    }
+}
+
+.createContainer h1 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: var(--accent);
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 12px;
+}
+
+.createForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.createForm label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.createForm input,
+.createForm textarea,
+.createForm select {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.createForm textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.createForm input:focus,
+.createForm textarea:focus,
+.createForm select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 187, 0, 0.15);
+}
+
+.createForm button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    background-color: var(--accent);
+    color: var(--text-dark);
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.createForm button[type="submit"]:hover {
+    background-color: var(--accent-hover);
+}
+
+.createForm button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+.createForm .error {
+    color: var(--error-text);
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   LISTING DETAILS PAGE
+   ============================================================ */
+
+.main-container {
+    max-width: 60%;
+    margin: 24px auto 40px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    align-items: start;
+    flex: 1;
+}
+
+.detail-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow);
+    padding: 24px;
+    border: 1px solid var(--border);
+}
+
+.image-gallery {
+    margin-bottom: 20px;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    background-color: var(--bg-primary);
+}
+
+.main-image-box {
+    width: 100%;
+    height: 200px;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-box-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.image-placeholder-text {
+    color: var(--text-secondary);
+}
+
+.card-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.status-available {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid;
+    border-radius: 20px;
+    color: var(--success-text);
+    border-color: var(--success-text);
+    background-color: var(--success-bg);
+}
+
+.listing-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.listing-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.listing-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.card-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 18px 0 16px;
+}
+
+.contact-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-heading {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.seller-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.seller-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.seller-name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.seller-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--accent);
+    color: var(--text-dark);
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.contact-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.contact-btn:active {
+    transform: scale(0.98);
+}
+
+.contact-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+
+.about-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 1px 4px var(--shadow);
+    color: var(--text-primary);
+    line-height: 1.7;
+    border: 1px solid var(--border);
+}
+
+.team-section {
+    max-width: 800px;
+    margin: 20px auto 60px;
+}
+
+.team-section h2 {
+    color: var(--accent);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.team-card {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.team-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--text-dark);
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+}
+
+.team-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--text-primary);
+    margin: 0 0 6px 0;
+}
+
+.team-role {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.github-link {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.github-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   LEGACY HTML ITEM LISTING
+   ============================================================ */
 
 .eachListing {
     display: inline-flex;
     border-radius: 0.5rem;
-
 }
 
 #itemsList {
@@ -301,263 +986,64 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
-  }
-  
-  .item-listing {
-    background-color: #ffffff;
+}
+
+.item-listing {
+    background-color: var(--bg-card);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 4px var(--shadow);
     cursor: pointer;
     transition: transform 0.2s;
-  }
-  
-  .item-listing:hover {
+    margin: 1%;
+}
+
+.item-listing:hover {
     transform: scale(1.02);
-  }
-  
-  .item-image {
+}
+
+.item-image {
     width: 100%;
     height: 180px;
-    background-color: #e0e0e0;
+    background-color: var(--bg-secondary);
     overflow: hidden;
-  }
-  
-  .item-image img {
+}
+
+.item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .item-info  {
-    padding: 10px 12px;
-    text-decoration: none;
-  }
+}
 
-  a {
-    text-decoration: none;
-  }
-  
-  .item-price {
+.item-info {
+    padding: 10px 12px;
+}
+
+.item-price {
     font-weight: bold;
     font-size: 16px;
-    color: #1c1e21;
+    color: var(--accent);
     margin: 0 0 4px 0;
-  }
-  
-  .item-title {
+}
+
+.item-title {
     font-size: 14px;
-    color: #333;
+    color: var(--text-primary);
     margin: 0 0 4px 0;
-  }
-  
-  .item-description {
+}
+
+.item-description {
     font-size: 12px;
-    color: #888;
+    color: var(--text-secondary);
     margin: 0;
-  }
-  .item-category {
+}
+
+.item-category {
     font-size: 11px;
-    color: #aaa;
+    color: var(--text-secondary);
     margin: 4px 0 0 0;
-  }
-
-  /*  ABOUT PAGE */
-
-.about-section {
-    max-width: 800px;
-    margin: 40px auto;
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    color: #1c1e21;
-    line-height: 1.7;
-  }
-  
-  .team-section {
-    max-width: 800px;
-    margin: 20px auto 60px;
-  }
-  
-  .team-section h2 {
-    color: #1c1e21;
-  }
-  
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .team-card {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-  
-  .team-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #FFBB00;
-    color: black;
-    font-weight: bold;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 10px;
-  }
-  
-  .team-name {
-    font-weight: bold;
-    font-size: 14px;
-    color: #1c1e21;
-    margin: 0 0 6px 0;
-  }
-  
-  .team-role {
-    font-size: 12px;
-    color: #888;
-    margin: 0;
-  }
-  
-  .github-link {
-    font-size: 12px;
-    color: #FFBB00;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .github-link:hover {
-    text-decoration: underline;
-  }
-
-  /* Navigation */
-
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-bottom: 2px solid #FFBB00;
-    background-color: #ffffff;
-  }
-  
-  header h1 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  nav {
-    display: flex;
-    gap: 20px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #1c1e21;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: background-color 0.2s;
-  }
-  
-  nav a:hover {
-    background-color: #FFBB00;
-    color: black;
-  }
-
-  /* Profile Page Styling */
-
-  #createListing {
-    display: block;
-    margin: auto;
-    width: 20%;
-    border-radius: 0.7rem;
-  }
-
-  /* Create Lisitng Page Styling */
-
-.createForm {
-    display: block;
-    margin: auto;
-    width: 35rem;
 }
 
-.createForm textarea {
-   
-    height: 10rem;
-    width: 36rem;
-    resize: none;
-    margin-bottom: 5rem;
-}
-
-.createForm input {
-   margin-bottom: 5rem;
-}
-
-.createForm button {
-   margin-top: 5rem;
-   margin-bottom: 5rem;
-}
-
-/* Homepage Styling */
-
-.search-container {
-    display: block;
-    width: 50%;
-    margin: auto;
-}
-
-.search-container label {
-    color: black;
-}
-
-/* Listing Details Page Styling */
-
-.listingDetails {
-    display: block;
-    width: 60%;
-    scale: 150%;
-    margin: auto;
-    margin-top: 5%;
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-}
-
-.listingDetails h2 {
-    color:rgb(255, 255, 255);
-}
-
-.contactDetails {
-    display: block;
-    width: 60%;
-    scale: 150%;
-    margin: auto;
-    margin-top: 5%;
-    padding-left: 2%;
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-    color: black;
-}
-
-.item-status{
-    color:rgb(0, 0, 0);
-    margin: 0 0 4px 0;
-    display: inline;
-    font-size: 11px;
-}
-
-.listingDetails .item-price {
-    display: inline;
+.search-bar {
+    margin-bottom: 20px;
 }

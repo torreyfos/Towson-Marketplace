@@ -1,13 +1,17 @@
 import {useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import {useAuthContext} from "../CustomHooks/useAuthContext"
 
 const ListingDetails = function () {
     
     const [listing, setListing] = useState("");
     const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState("");
     const {id} = useParams();
+    const {user} = useAuthContext();
 
+    //gets the specific listing form the database
     useEffect (function () {
 
         const getListing = async function () {
@@ -26,7 +30,6 @@ const ListingDetails = function () {
             } finally {
                 setLoading(false);
             }
-           
         }
 
         getListing();
@@ -36,64 +39,108 @@ const ListingDetails = function () {
         return <h1>Loading please wait...</h1>
     }
 
+    //-----------------------logic for the buyer to send the seller an email---------------------
+    const handleSubmit = async function (e) {
+
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5000/contact-seller', {
+                method: 'POST',
+                headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.token}`
+                },
+                body: JSON.stringify({
+                    buyerEmail: user.email,   // the logged-in buyer's email
+                    sellerEmail: listing.seller.email,   // the seller's email from the listing
+                    subject: "Someone Is Interested In Your Listing!",
+                    message: message
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Send failed');
+            }
+            alert('Message sent!');
+
+        } catch (err) {
+            alert('Failed to send message.');
+        }
+    }
+    //----------------------------------------------------------------------------------------
+
     return (
 
-        <div >
+        <main className = "main-container"> {/* Main Content */}
 
-            <h1>Listing Details:</h1>
-                    
-            <li className="listingDetails">
-                
-                <div className="item-info">
+            {/* listing card */}
+            <article className = "detail-card listing-card">
 
-                    {/* displays the details of a listing*/}
-                    <p className="item-price">${listing.price}</p>
-                    <p className="item-status"> - {listing.status}</p>
-                    <p className="item-title">{listing.title}</p>
-                    <p className="item-description">{listing.description}</p>
-                    <p className="item-category">{listing.category} · On Campus</p>
-
+                {/* images */}
+                <div className = "image-gallery">
+                    <p>No images uploaded</p>
                 </div>
-            </li>
+                                
+                <hr className = "card-divider" />
 
-            <br />
-            <br />
-            <h2>Contact Seller:</h2>
-            <div className="contactDetails">
+                {/* status and price */}
+                <div className = "card-top-row">
+                    <span className = "status-available">{listing.status}</span>
+                    <span className = "listing-price">${listing.price}</span>
+                </div>
 
-                {/* display seller's name and email*/}
-                <p>{listing.seller.name}</p>
-                <p>{listing.seller.email}</p>
+                {/* title */}
+                <h1 className = "listing-title">{listing.title}</h1>
 
-            </div>
+                {/* description */}
+                <p className = "listing-description"> {listing.description} </p>
 
-                
+                <div className = "meta-row">
+                    <span className = "meta-category">
+                        ~ {listing.category}
+                    </span>
+                    <span>|</span>
+                    <span className = "meta-location">
+                        ~ On Campus
+                    </span>
+                </div>
+            </article>
 
-            {/* </div>
+            {/* contact seller */}
+            <aside className = "detail-card contact-card">
+                <h2 className = "contact-heading">Contact Seller</h2>
 
-                <h2>Title:</h2>
-                <h3>{listing.title}</h3>
+                <div className = "seller-profile">
+                    <div className = "seller-info">
+                        <p className = "seller-name">{listing.seller.name}</p>
+                        <p className = "seller-email"> {listing.seller.email} </p>
+                    </div>
+                </div>
 
-                <h2>Price:</h2>
-                <h3>${listing.price}</h3>
+                {/* email form */}
+                <form className = "contact-form" onSubmit={handleSubmit}>
+                    <div className = "form-group">
 
-                <h2>Description:</h2>
-                <h3>{listing.description}</h3>
+                        <label for="message" className = "form-label">Body:</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="4"
+                            placeholder="Hi, I'm interested in..."
+                            required
+                            onChange={function (e) {setMessage (e.target.value)} }
+                            value={message}
+                        ></textarea>
+                    </div>
+                    <button type="submit" className = "contact-btn">Send Email</button>
+                </form>
 
-                <h2>Status:</h2>
-                <h3>{listing.status}</h3>
+                <p className = "contact-note">
+                    This will be sent to the seller's email.
+                </p>
+            </aside>
 
-                <h2>Category:</h2>
-                <h3>{listing.category}</h3>
-
-                <h2>Seller: </h2>
-                <h3>{listing.seller.name}</h3>
-
-                <h2>Email:</h2>
-                <h3>{listing.seller.email}</h3>
-            </div> */}
-
-        </div>
+        </main>
     )
 }
 
