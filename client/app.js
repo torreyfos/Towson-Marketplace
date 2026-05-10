@@ -2,20 +2,16 @@ const BASE_URL = "http://localhost:5000/api/items";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
-    const darkBtn = document.getElementById("darkModeToggle");
 
     if (form) {
         form.addEventListener("submit", handleLogin);
-    }
-
-    if (darkBtn) {
-        darkBtn.addEventListener("click", toggleDarkMode);
     }
 
     if (document.getElementById("itemsList")) {
         loadAllItems();
     }
 });
+
 function handleLogin(event) {
     event.preventDefault();
 
@@ -71,10 +67,6 @@ async function searchItems() {
     }
 }
 
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-}
-
 function displayItems(items) {
     const list = document.getElementById("itemsList");
     list.innerHTML = "";
@@ -86,67 +78,16 @@ function displayItems(items) {
 
     items.forEach(item => {
         const li = document.createElement("li");
-        li.className = "item-listing";
+        li.className = "item-card";
 
         li.innerHTML = `
-            <div class="item-image">
-                <img src="${item.image || 'placeholder.png'}" alt="${item.title}">
-            </div>
-            <div class="item-info">
-            <p class="item-price">$${item.price}</p>
-            <p class="item-title">${item.title}</p>
-            <p class="item-description">${item.description || "No description provided"}</p>
-            <p class="item-category">${item.category} · ${item.location || "Location TBD"}</p>
-
-            <p><strong>Seller:</strong> ${item.seller}</p>
-
-                <div class="rating-section">
-                    <p>Rate Seller:</p>
-                    <div class="stars" data-seller="${item.seller}">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
-                    </div>
-                </div>
-            </div>
+            <h3>${item.title}</h3>
+            <p><strong>Price:</strong> $${item.price}</p>
+            <p><strong>Category:</strong> ${item.category}</p>
+            <p><strong>Location:</strong> ${item.location || "Not specified"}</p>
+            <p>${item.description || ""}</p>
         `;
+
         list.appendChild(li);
-    });
-
-    addStarListeners();}
-
-    function addStarListeners() {
-    let alreadyRated = false;
-
-    document.querySelectorAll(".star").forEach(star => {
-        star.addEventListener("click", function () {
-
-            if (alreadyRated) return;
-            alreadyRated = true;
-
-            const rating = this.dataset.value;
-            const container = this.parentElement;
-            const seller = container.dataset.seller;
-
-            const stars = container.querySelectorAll(".star");
-
-            stars.forEach(s => s.classList.remove("selected"));
-
-            for (let i = 0; i < rating; i++) {
-                stars[i].classList.add("selected");
-            }
-
-            fetch("http://localhost:5000/rate-user", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    sellerEmail: seller,
-                    rating,
-                    fromUser: localStorage.getItem("user")
-                })
-            });
-        });
     });
 }
