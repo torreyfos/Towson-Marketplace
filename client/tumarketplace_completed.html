@@ -31,21 +31,67 @@
 
     <button onclick="searchItems()">Search</button>
 
+    <h2>Sell an Item</h2>
+
+<div class="sell-form">
+
+    <input type="text"
+           id="itemTitle"
+           placeholder="Item Title">
+
+    <input type="number"
+           id="itemPrice"
+           placeholder="Price">
+
+    <textarea id="itemDescription"
+              placeholder="Describe your item..."></textarea>
+
+    <select id="itemCategory">
+        <option value="Essentials">Essentials</option>
+        <option value="School Supplies">School Supplies</option>
+        <option value="Furniture">Furniture</option>
+    </select>
+
+    <button onclick="postItem()">
+        Post Item
+    </button>
+
+</div>
+
     <h2>Available Items</h2>
     <ul id="itemsList">
 
         <!--example listings -->
         <li class="item-listing">
-            <div class="item-image">
-              <img src="textbook.jpeg" alt="Item">
-            </div>
-            <div class="item-info">
-              <p class="item-price">$25.00</p>
-              <p class="item-title">Textbook - COSC 175</p>
-              <p class="item-description">Barely used, great condition.</p>
-              <p class="item-category">School Supplies · On Campus</p>
-            </div>
-          </li>
+
+    <div class="item-image">
+        <img src="textbook.jpeg" alt="Item">
+    </div>
+
+    <div class="item-info">
+
+        <p class="item-price">$25.00</p>
+
+        <p class="item-title">
+            Textbook - COSC 175
+        </p>
+
+        <p class="item-description">
+            Barely used textbook with no highlighting.
+            Includes practice problems and notes.
+        </p>
+
+        <p class="item-category">
+            School Supplies · On Campus
+        </p>
+
+        <button class="message-btn">
+            Message Seller
+        </button>
+
+    </div>
+
+</li>
           
           <li class="item-listing">
             <div class="item-image">
@@ -68,12 +114,47 @@
               <p class="item-title">Mini Fridge</p>
               <p class="item-description">Small fridge, perfect for dorm rooms.</p>
               <p class="item-category">Furniture · Prettyman Hall</p>
+
+               <button class="message-btn">
+                    Message Seller
+                </button>
             </div>
           </li>
+           </ul>
 
 
+    <!-- MESSAGES -->
+    <div class="messages-section">
 
-    </ul>
+        <h2>Messages</h2>
+
+        <div class="chat-box" id="chatBox">
+
+            <div class="message received">
+                Hi, is the textbook still available?
+            </div>
+
+            <div class="message sent">
+                Yes! Are you interested?
+            </div>
+
+        </div>
+         
+         </div>
+
+        <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a message..."
+        >
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+
 </div>
 
 <script src="app.js"></script>

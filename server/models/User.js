@@ -1,23 +1,30 @@
-const mongoose = require("mongoose");
 
-//a schema to define the structure of our user document
+  const mongoose = require("mongoose");
+
 const userSchema = new mongoose.Schema({
 
-    name: {
+    fullName: {
         type: String,
-        required: true,
+        required: true
     },
 
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
 
     password: {
         type: String,
-        required: true,
+        required: true
+    },
+
+    profilePicture: {
+        type: String,
+        default: ""
     }
+
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports =
+    mongoose.model("User", userSchema);

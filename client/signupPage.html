@@ -13,16 +13,55 @@
             <h1> TU Marketplace Sign-up</h1>
 
             <form id = "signupForm">
-                <label for = "name">Name:</label><br>
-                <input type = "text" id = "name" name = "name" required><br>
-                <label for = "email">TU Email:</label><br>
-                <input type = "email" id ="email" name = "email" placeholder = "name@students.towson.edu" required><br>
-                <label for = "psw"> Password:</label><br>
-                <input type = "password" id = "psw" name="psw" required>
-                <input type = "checkbox" onClick = "showPsw()"> Show Password<br>
-                <label for = "confirmPsw"> Confirm Password:</label><br>
-                <input type = "password" id = "confirmPsw" name = "confirmPsw" required>
-                <input type = "checkbox" onClick = "showConfirmPsw()"> Show Password<br>
+                
+            <label for="fullName">Full Name:</label><br>
+            <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+            ><br>
+            
+            <label for="profilePic">Profile Picture:</label><br>
+            <input
+                type="file"
+                id="profilePic"
+                accept="image/*"
+            ><br><br>
+            
+            <label for="email">TU Email:</label><br>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@students.towson.edu"
+                required
+            ><br>
+
+            <label for="psw">Password:</label><br>
+            <input
+                type="password"
+                id="psw"
+                name="psw"
+                required
+            >
+            <input
+                type="checkbox"
+                onClick="showPsw()"
+            > Show Password<br>
+
+            <label for="confirmPsw">Confirm Password:</label><br>
+            <input
+                type="password"
+                id="confirmPsw"
+                name="confirmPsw"
+                required
+            >
+
+            <input
+                type="checkbox"
+                onClick="showConfirmPsw()"
+            > Show Password<br>
 
                 <p id="error" style="color: red;"></p>
                 <button type="submit" class = "signup-btn">Create Account</button>

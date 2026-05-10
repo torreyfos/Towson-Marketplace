@@ -66,6 +66,80 @@ async function searchItems() {
         console.error("Search error:", err);
     }
 }
+function sendMessage() {
+
+    const input =
+        document.getElementById("messageInput");
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    if (input.value.trim() === "") return;
+
+    const message =
+        document.createElement("div");
+
+    message.classList.add("message", "sent");
+
+    message.textContent = input.value;
+
+    chatBox.appendChild(message);
+
+    input.value = "";
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function postItem() {
+
+    const title =
+        document.getElementById("itemTitle").value;
+
+    const price =
+        document.getElementById("itemPrice").value;
+
+    const description =
+        document.getElementById("itemDescription").value;
+
+    const category =
+        document.getElementById("itemCategory").value;
+
+    const itemsList =
+        document.getElementById("itemsList");
+
+    const item =
+        document.createElement("li");
+
+    item.classList.add("item-listing");
+
+    item.innerHTML = `
+        <div class="item-info">
+
+            <p class="item-price">
+                $${price}
+            </p>
+
+            <p class="item-title">
+                ${title}
+            </p>
+
+            <p class="item-description">
+                ${description}
+            </p>
+
+            <p class="item-category">
+                ${category}
+            </p>
+
+            <button class="message-btn">
+                Message Seller
+            </button>
+
+        </div>
+    `;
+
+    itemsList.prepend(item);
+}
 
 function displayItems(items) {
     const list = document.getElementById("itemsList");

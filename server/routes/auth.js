@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Listing = require('../models/Listing');
 const tokenAuth = require("../middleware/tokenAuth");
+const { upload } = require("../cloudinary");
 
 //function to create a token so we can authenticate the user
 const createToken = function (_id) {
@@ -17,7 +18,7 @@ const createToken = function (_id) {
 //POST /auth/register
 //creates a new user account
 router.post('/register', async function (req, res) {
-  const { name, email, password } = req.body;
+  const { fullname, email, password } = req.body;
 
   try {
 
@@ -37,19 +38,24 @@ router.post('/register', async function (req, res) {
     //hashing the given password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    // PROFILE PICTURE URL
+            const profilePicture = req.file
+                    ? req.file.path
+                    : "";
 
     //creating a new user with the new hashed password
     user = await User.create({
-      name,
+      fullName,
       email,
       password: hashedPassword,
+      profilePicture
     });
 
     //create a token for the new user
     const token = createToken(user._id)
 
     //sends the reponse back to the client
-    res.status(201).json({email, token});
+    res.status(201).json({email, token, fullName, profilePicture});
 
   } catch (error) {
 
@@ -84,7 +90,7 @@ router.post('/login', async function (req, res) {
     //create token
     const token = createToken(user._id);
 
-    res.status(200).json({email, token});
+    res.status(200).json({email, token, fullName: user.fullName, profilePicture: user.profilePicture});
 
   } catch (error) {
 
