@@ -81,7 +81,7 @@ const Homepage = function () {
 
                         <div className="home-card-image">
                             <img
-                                src={listing.images && listing.images[0] ? listing.images[0] : chair}
+                                src={listing.images && listing.images[0] ? listing.images[0] : "https://placehold.net/default.png"}
                                 alt={listing.title}
                             />
                             <span className={`status-badge ${listing.status === "Available" ? "badge-available" : "badge-sold"}`}>

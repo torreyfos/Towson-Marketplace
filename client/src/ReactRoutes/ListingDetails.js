@@ -77,8 +77,19 @@ const ListingDetails = function () {
             <article className = "detail-card listing-card">
 
                 {/* images */}
-                <div className = "image-gallery">
-                    <p>No images uploaded</p>
+                <div className="image-gallery">
+                    {listing.images && listing.images.length > 0 ? (
+
+                        listing.images.map((imgUrl, index) => (
+                        <img className = "listingDetails-image-gallery"
+                            key={index}
+                            src={imgUrl}
+                            alt={`${listing.title}`}
+                        />
+                        ))
+                    ) : (
+                        <p>No images uploaded</p>
+                    )}
                 </div>
                                 
                 <hr className = "card-divider" />
@@ -132,7 +143,10 @@ const ListingDetails = function () {
                             value={message}
                         ></textarea>
                     </div>
-                    <button type="submit" className = "contact-btn">Send Email</button>
+                    {/* If the listing is marked as sold, prevents the buyer from emailing the seller */}
+                    {listing.status == "Sold" ? (
+                        <button disabled type="submit" className = "contact-btn"  >Send Email </button>
+                    ) : (<button type="submit" className = "contact-btn">Send Email </button>)}
                 </form>
 
                 <p className = "contact-note">

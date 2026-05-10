@@ -133,10 +133,15 @@ const Profile = function () {
                         {listings.map((listing) => (
                             <div className="listing-card" key={listing._id}>
                                 <div className="card-content">
-                                    <img
-                                        src={listing.images && listing.images[0] ? listing.images[0] : "placeholder.png"}
-                                        alt={listing.title}
-                                    />
+                                    {/* displays the first image in the listing cards. 
+                                    If the user didn't upload an image for the listing, then display "No images uploaded" */}
+                                    {listing.images && listing.images.length > 0 ? (
+                                        <img className = "profile-image-display"
+                                            src={listing.images && listing.images[0] ? listing.images[0] : "placeholder.png"}
+                                            alt={listing.title}
+                                        />
+                                    ) : (<p>No images uploaded</p>)}
+                                    
                                     <h4 className="listing-title">{listing.title}</h4>
                                     <p className="listing-desc">{listing.description}</p>
 

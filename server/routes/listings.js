@@ -183,13 +183,13 @@ router.patch("/:id", tokenAuth, async function (req, res) {
         }
 
         //checks to see if the field the user gave exists before saving it to the listing
-        if (title !== undefined || title !== "" ) {
+        if (title !== undefined && title !== "" ) {
             updateListing.title = title;
         }
-        if (description !== undefined || description !== "" ) {
+        if (description !== undefined && description !== "" ) {
             updateListing.description = description;
         }
-        if (price !== undefined || price !== "" ) {
+        if (price !== undefined && price !== "" ) {
             updateListing.price = price;
         }
         if(status !== undefined){

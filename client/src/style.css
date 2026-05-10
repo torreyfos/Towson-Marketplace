@@ -590,6 +590,11 @@ nav button {
     background-color: #4a1a1a;
 }
 
+.profile-image-display {
+
+    width: 70%;
+}
+
 /* ============================================================
    CREATE & EDIT LISTING PAGE
    ============================================================ */
@@ -889,6 +894,14 @@ nav button {
     font-size: 12px;
     color: var(--text-secondary);
     text-align: center;
+}
+
+.listingDetails-image-gallery {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  display: inline-flex;  
+  margin-left: 0.75%;
 }
 
 /* ============================================================
