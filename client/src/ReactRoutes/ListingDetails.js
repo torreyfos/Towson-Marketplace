@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
 import {useAuthContext} from "../CustomHooks/useAuthContext"
+import BASE_URL from "../config";
 
 const ListingDetails = function () {
     
@@ -10,6 +11,7 @@ const ListingDetails = function () {
     const [message, setMessage] = useState("");
     const {id} = useParams();
     const {user} = useAuthContext();
+    
 
     //gets the specific listing form the database
     useEffect (function () {
@@ -21,7 +23,7 @@ const ListingDetails = function () {
                 setLoading(true);
 
                 //using axios to make a get request to the database to display the specfic listing (based on the provided listing _id)
-                const response = await axios.get(`http://localhost:5000/listings/${id}`)
+                const response = await axios.get(`${BASE_URL}/listings/${id}`)
 
                 setListing(response.data);
             } catch (error) {
@@ -44,7 +46,7 @@ const ListingDetails = function () {
 
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/contact-seller', {
+            const response = await fetch(`${BASE_URL}/contact-seller`, {
                 method: 'POST',
                 headers: {
                 "Content-Type": "application/json",

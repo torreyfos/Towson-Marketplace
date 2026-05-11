@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import { useAuthContext } from "../CustomHooks/useAuthContext";
+import BASE_URL from "../config";
 
 const EditListing = function () {
 
@@ -23,7 +24,7 @@ const EditListing = function () {
 
             try {
 
-                const response = await fetch(`http://localhost:5000/listings/${id}`);
+                const response = await fetch(`${BASE_URL}/listings/${id}`);
                 const data = await response.json();
 
                 if (!response.ok) {
@@ -60,7 +61,7 @@ const EditListing = function () {
 
         try {
             
-            const response = await fetch(`http://localhost:5000/listings/${id}`, {
+            const response = await fetch(`${BASE_URL}/listings/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
