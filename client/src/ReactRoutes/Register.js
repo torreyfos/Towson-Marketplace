@@ -5,7 +5,7 @@ import BASE_URL from "../config";
 
 const Register = function () {
     
-    const [fullname, setName] = useState("");
+    const [fullName, setName] = useState("");
     const [email, setEmail] = useState("");
     const [psw, setPsw] = useState("");
     const [confirmPsw, setConfirmPsw] = useState("");
@@ -15,7 +15,7 @@ const Register = function () {
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        if (!name.trim()) { setError("Please enter your name"); return; }
+        if (!fullName.trim()) { setError("Please enter your name"); return; }
         if (!email.trim() || !email.endsWith("@students.towson.edu")) { setError("Please use your Towson email"); return; }
         if (!psw.trim()) { setError("Please enter a password"); return; }
         if (psw.length < 8) { setError("Password must be at least 8 characters"); return; }
@@ -25,7 +25,7 @@ const Register = function () {
             const res = await fetch(`${BASE_URL}/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ fullname, email, password: psw })
+                body: JSON.stringify({ fullName, email, password: psw })
             });
 
             const result = await res.json();
