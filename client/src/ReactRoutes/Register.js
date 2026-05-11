@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {Link} from "react-router-dom";
 import { useAuthContext } from "../CustomHooks/useAuthContext";
+import BASE_URL from "../config";
 
 const Register = function () {
     
@@ -21,7 +22,7 @@ const Register = function () {
         if (psw !== confirmPsw) { setError("Passwords do not match"); return; }
 
         try {
-            const res = await fetch("http://localhost:5000/auth/register", {
+            const res = await fetch(`${BASE_URL}/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password: psw })

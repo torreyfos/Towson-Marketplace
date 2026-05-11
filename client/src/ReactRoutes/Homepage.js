@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import chair from "../beanbag-chair.webp";
+import BASE_URL from "../config";
 
 const Homepage = function () {
 
@@ -13,7 +13,7 @@ const Homepage = function () {
     useEffect(function () {
         const getListings = async function () {
             try {
-                const response = await fetch("http://localhost:5000/listings/", { method: "GET" });
+                const response = await fetch(`${BASE_URL}/listings/`, { method: "GET" });
                 const result = await response.json();
                 if (response.ok) { setListings(result); }
             } catch (error) {
@@ -28,7 +28,7 @@ const Homepage = function () {
     const handleSearch = async function () {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/listings/search?searchTitle=${searchTitle}&searchCategory=${searchCategory}`, { method: "GET" });
+            const response = await fetch(`${BASE_URL}/listings/search?searchTitle=${searchTitle}&searchCategory=${searchCategory}`, { method: "GET" });
             const result = await response.json();
             if (!response.ok) { throw new Error("Search failed"); }
             setListings(result);

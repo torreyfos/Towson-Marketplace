@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../CustomHooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../config";
 
 const Profile = function () {
     const [listings, setListings] = useState([]);
@@ -12,7 +13,7 @@ const Profile = function () {
     useEffect(function () {
         const getUserListings = async function () {
             try {
-                const response = await fetch("http://localhost:5000/listings/my", {
+                const response = await fetch(`${BASE_URL}/listings/my`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
 
@@ -40,7 +41,7 @@ const Profile = function () {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/listings/${id}`, {
+            const response = await fetch(`${BASE_URL}/listings/${id}`, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${user.token}` }
             });
@@ -62,7 +63,7 @@ const Profile = function () {
         const newStatus = currentStatus === "Available" ? "Sold" : "Available";
 
         try {
-            const response = await fetch(`http://localhost:5000/listings/${id}`, {
+            const response = await fetch(`${BASE_URL}/listings/${id}`, {
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${user.token}`,
@@ -87,7 +88,7 @@ const Profile = function () {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/auth/delete", {
+            const response = await fetch(`${BASE_URL}/auth/delete`, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${user.token}` }
             });

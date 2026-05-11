@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useAuthContext} from "../CustomHooks/useAuthContext"
+import BASE_URL from "../config";
 
 const CreateListing = function () {
 
@@ -30,7 +31,7 @@ const CreateListing = function () {
             formData.append('images', images[i]);
         }
 
-        const response = await fetch("http://localhost:5000/listings/", {
+        const response = await fetch(`${BASE_URL}/listings/`, {
             method: "POST",
             body: formData,
             headers: {

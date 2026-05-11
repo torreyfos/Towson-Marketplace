@@ -2,6 +2,7 @@ import logo from "../Towson-Marketplace-Logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../CustomHooks/useAuthContext";
+import BASE_URL from "../config";
 
 const Login = function () {
 
@@ -18,7 +19,7 @@ const Login = function () {
         if (password.length < 8) { setError("Password must be at least 8 characters"); return; }
 
         try {
-            const res = await fetch("http://localhost:5000/auth/login", {
+            const res = await fetch(`${BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
