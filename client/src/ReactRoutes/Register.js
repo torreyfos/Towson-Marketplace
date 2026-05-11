@@ -5,7 +5,7 @@ import BASE_URL from "../config";
 
 const Register = function () {
     
-    const [name, setName] = useState("");
+    const [fullname, setName] = useState("");
     const [email, setEmail] = useState("");
     const [psw, setPsw] = useState("");
     const [confirmPsw, setConfirmPsw] = useState("");
