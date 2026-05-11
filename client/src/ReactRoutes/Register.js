@@ -56,7 +56,7 @@ const Register = function () {
             <h1>TU Marketplace Sign-up</h1>
             <form onSubmit={handleSignup}>
                 <label>Full Name:</label><br />
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} required /><br />
+                <input type="text" value={fullName} onChange={(e) => setName(e.target.value)} required /><br />
 
                 <label>TU Email:</label><br />
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@students.towson.edu" required /><br />
