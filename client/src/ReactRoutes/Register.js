@@ -25,7 +25,7 @@ const Register = function () {
             const res = await fetch(`${BASE_URL}/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password: psw })
+                body: JSON.stringify({ fullname, email, password: psw })
             });
 
             const result = await res.json();
