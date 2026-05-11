@@ -18,7 +18,7 @@ const createToken = function (_id) {
 //POST /auth/register
 //creates a new user account
 router.post('/register', async function (req, res) {
-  const { fullname, email, password } = req.body;
+  const { fullName, email, password } = req.body;
 
   try {
 
